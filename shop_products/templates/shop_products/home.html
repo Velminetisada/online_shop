@@ -107,12 +107,13 @@
     <a href="/">Home</a>
     <a href="{% url 'cart' %}">🛒 Cart</a>
 
-    {% if user.is_authenticated %}
+   {% if user.is_authenticated %}
+        <a href="{% url 'order_history' %}">📦 My Orders</a>
         <a href="{% url 'logout' %}">Logout</a>
-    {% else %}
+   {% else %}
         <a href="{% url 'login' %}">Login</a>
         <a href="{% url 'register' %}">Register</a>
-    {% endif %}
+   {% endif %}
 
     <a href="/admin/">Admin</a>
 </div>
@@ -152,19 +153,6 @@
 
 </body>
 </html>
-nav {
-    background: white;
-    padding: 15px 25px;
-    margin-bottom: 25px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-nav a {
-    margin: 0 12px;
-    font-weight: bold;
-}
 
 h1 {
     font-size: 32px;
