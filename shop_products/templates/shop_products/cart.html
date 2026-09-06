@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shopping Cart</title>
+    <link rel="stylesheet" href="{% static 'shop_products/style.css' %}">
+</head>
+<body>
+
+    <div class="cart-container">
+
+        <h1>🛒 Shopping Cart</h1>
+
+        <p>
+            <a href="{% url 'home' %}">← Continue Shopping</a>
+        </p>
+
+        {% for item in cart_items %}
+
+            <div class="cart-item">
+
+                <h2>{{ item.product.name }}</h2>
+
+                <p>Price: ₹{{ item.product.price }}</p>
+
+                <p class="quantity-buttons">
+                    Quantity:
+                    <a href="{% url 'decrease_quantity' item.product.id %}">➖</a>
+                    {{ item.quantity }}
+                    <a href="{% url 'increase_quantity' item.product.id %}">➕</a>
+                </p>
+
+                <p>Subtotal: ₹{{ item.subtotal }}</p>
+
+                <p>
+                    <a href="{% url 'remove_from_cart' item.product.id %}">
+                        ❌ Remove from Cart
+                    </a>
+                </p>
+
+            </div>
+
+        {% empty %}
+
+            <div class="cart-item">
+                <h2>Your cart is empty.</h2>
+            </div>
+
+        {% endfor %}
+
+        <div class="total">
+            Total: ₹{{ total }}
+        </div>
+
+        <p>
+            <a href="{% url 'checkout' %}" class="cart-button">
+                ➡️ Proceed to Checkout
+            </a>
+        </p>
+
+    </div>
+
+</body>
+</html>

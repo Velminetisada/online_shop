@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<link rel="stylesheet" href="{% static 'shop_products/style.css' %}">
+<head>
+    <title>My Online Shop</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        .navbar {
+            background: #222;
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h1 {
+            margin: 0;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 45px 20px;
+            background: white;
+        }
+
+        .hero h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .product-card {
+            background: white;
+            width: 260px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        .price {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .stock {
+            color: #555;
+        }
+
+        .cart-button {
+            display: inline-block;
+            background: #222;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            background: #222;
+            color: white;
+            padding: 20px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <h1>🛒 My Online Shop</h1>
+
+        <div>
+            <a href="/">Home</a>
+            <a href="/admin/">Admin</a>
+        </div>
+    </div>
+
+    <div>
+    <a href="/">Home</a>
+    <a href="{% url 'cart' %}">🛒 Cart</a>
+
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'register' %}">Register</a>
+    {% endif %}
+
+    <a href="/admin/">Admin</a>
+</div>
+    <div class="products">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <h3>{{ product.name }}</h3>
+
+            <p>{{ product.description }}</p>
+
+            <p class="price">₹{{ product.price }}</p>
+
+            <p class="stock">
+                Available: {{ product.stock }}
+            </p>
+
+            <a href="{% url 'add_to_cart' product.id %}" class="cart-button">
+    🛒 Add to Cart
+</a>
+
+        </div>
+
+        {% empty %}
+
+        <p>No products available.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <footer>
+        <p>© 2026 My Online Shop | All Rights Reserved</p>
+    </footer>
+
+</body>
+</html>
+nav {
+    background: white;
+    padding: 15px 25px;
+    margin-bottom: 25px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+nav a {
+    margin: 0 12px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: 32px;
+}

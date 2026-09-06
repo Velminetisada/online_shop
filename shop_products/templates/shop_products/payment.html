@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+    <link rel="stylesheet" href="{% static 'shop_products/style.css' %}">
+</head>
+<body>
+
+    <div class="cart-container">
+
+        <h1>💳 Payment</h1>
+
+        <div class="cart-item">
+            <h2>Total Amount: ₹{{ total }}</h2>
+
+            <form method="post">
+                {% csrf_token %}
+
+                <label>Payment Method:</label>
+                <select name="payment_method" required>
+                    <option value="">Select Method</option>
+                    <option value="UPI">UPI</option>
+                    <option value="Card">Card</option>
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                </select>
+
+                <button type="submit">Pay Now 💳</button>
+            </form>
+        </div>
+
+        <p>
+            <a href="{% url 'cart' %}">← Back to Cart</a>
+        </p>
+
+    </div>
+
+</body>
+</html>
